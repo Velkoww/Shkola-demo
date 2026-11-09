@@ -108,7 +108,7 @@ header.solid{background:var(--hdr);backdrop-filter:blur(8px);box-shadow:0 1px 0 
 .dd-pyth{bottom:26px;right:4%;font-size:2rem;transform:rotate(4deg)}
 .dd-hw{top:46%;left:51%;font-size:1.45rem;transform:rotate(-90deg);transform-origin:left top}
 @media(max-width:1100px){.dd-hw,.dd-lang{display:none}}
-@media(max-width:960px){.dd-date,.dd-frac,.dd-pi,.dd-x,.dd-can{display:none}.dd-hello{top:12px;font-size:1.9rem}.dd-mult{bottom:20px}}
+@media(max-width:960px){.dd-date,.dd-frac,.dd-pi,.dd-x,.dd-can{display:none}.dd-hello{top:12px;font-size:1.9rem}.dd-mult{bottom:20px}.dd-pyth{right:9%;font-size:1.75rem;bottom:22px}}
 
 /* polaroids on board */
 .pins{position:relative;height:520px}
@@ -875,30 +875,34 @@ function confetti(box){if(reduce)return;const cols=['#e2603a','#e5b445','#f3f1ea
       el.style.clipPath=`inset(-10px ${(1-k)*100}% -10px -10px)`;
       if(!light()&&t-lastDust>45){lastDust=t;const p=document.createElement('i');p.className='dust-p';p.style.left=cur.x+'px';p.style.top=cur.y+'px';p.style.setProperty('--dx',(Math.random()*16-8)+'px');hero.appendChild(p);setTimeout(()=>p.remove(),950)}
       k<1?requestAnimationFrame(f):(el.classList.add('done'),el.style.clipPath='',res())})(t0)})}
-  async function run(){
-    await new Promise(r=>setTimeout(r,700));
-    tool.classList.add('on');
-    for(const d of doodles){
-      if(!d.offsetParent)continue;
-      tool.style.setProperty('--tc',colorFor(d));
-      const g=geom(d);await move(g.sx,g.sy,380);await write(d);
-    }
-    /* then the tool writes the headline word */
-    followRot=true;
-    const rc=getComputedStyle(rot).color;tool.style.setProperty('--tc',rc);
-    const r=rot.getBoundingClientRect(),hr=hero.getBoundingClientRect();
-    await move(r.right-hr.left-hero.clientLeft,r.bottom-hr.top-hero.clientTop-r.height*.25,500);
-    cycle();
-  }
-  let followRot=false;
-  window.__toolFollow=()=>{if(!followRot)return;const c=rot.querySelector('.caret');if(!c)return;const r=c.getBoundingClientRect(),hr=hero.getBoundingClientRect();tool.style.setProperty('--tc',getComputedStyle(rot).color);place(r.left-hr.left-hero.clientLeft,r.bottom-hr.top-hero.clientTop-r.height*.15)};
   function rel(r){const hr=hero.getBoundingClientRect();return {l:r.left-hr.left-hero.clientLeft,t:r.top-hr.top-hero.clientTop,r:r.right-hr.left-hero.clientLeft,b:r.bottom-hr.top-hero.clientTop,w:r.width,h:r.height}}
-  /* after a word is written: move the marker away so it doesn't hide the last letter */
-  window.__toolRest=()=>{const c=rot.querySelector('.caret');if(!c)return;const r=rel(c.getBoundingClientRect());followRot=false;
-    const x=Math.min(r.r+58,hero.clientWidth-26),y=r.b+(hero.clientWidth<700?34:22);move(x,y,420).then(()=>followRot=true)};
-  /* eraser / sponge wipes the word before the next one */
-  window.__toolErase=async cb=>{
-    followRot=false;const R=rel(rot.getBoundingClientRect()),mid=R.t+R.h*.55;
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  /* one tool → one job at a time */
+  let lock=Promise.resolve();
+  const withTool=fn=>{const p=lock.then(fn);lock=p.catch(()=>{});return p};
+  /* wait until an element is really on screen */
+  const bottomPad=()=>innerWidth<=700?90:20;
+  const onScreen=el=>{const r=el.getBoundingClientRect();return r.top>=70&&r.bottom<=innerHeight-bottomPad()};
+  const whenVisible=el=>new Promise(res=>{if(onScreen(el))return res();
+    const chk=()=>{if(onScreen(el)){removeEventListener('scroll',chk);removeEventListener('resize',chk);res()}};
+    addEventListener('scroll',chk,{passive:true});addEventListener('resize',chk)});
+  const heroVisible=()=>{const r=hero.getBoundingClientRect();return r.bottom>80&&r.top<innerHeight};
+
+  async function writeDoodle(d){
+    tool.style.setProperty('--tc',colorFor(d));
+    const g=geom(d);await move(g.sx,g.sy,380);await write(d);
+  }
+  function caretPos(){const c=rot.querySelector('.caret');const r=rel(c.getBoundingClientRect());return {x:r.l,y:r.b-r.h*.15,r}}
+  async function rest(){const {r}=caretPos();const x=Math.min(r.r+58,hero.clientWidth-26),y=r.b+(hero.clientWidth<700?34:22);await move(x,y,420)}
+  async function typeP(w){
+    tool.style.setProperty('--tc',getComputedStyle(rot).color);
+    rot.innerHTML='<span class="caret"></span>';
+    let p=caretPos();await move(p.x,p.y,300);
+    for(let i=1;i<=w.length;i++){rot.innerHTML=w.slice(0,i)+'<span class="caret"></span>';p=caretPos();place(p.x,p.y+Math.sin(i*1.7)*2);await sleep(85)}
+    await rest();
+  }
+  async function eraseP(){
+    const R=rel(rot.getBoundingClientRect()),mid=R.t+R.h*.55;
     tool.classList.add('erasing');
     await move(R.l-6,mid,360);
     const sm=document.createElement('i');sm.className='smear';sm.style.cssText=`left:${R.l-10}px;top:${R.t+R.h*.15}px;width:${R.w+30}px;height:${R.h*.8}px`;hero.appendChild(sm);setTimeout(()=>sm.remove(),2600);
@@ -909,12 +913,28 @@ function confetti(box){if(reduce)return;const cols=['#e2603a','#e5b445','#f3f1ea
     rot.innerHTML='<span class="caret"></span>';rot.style.clipPath='';
     await move(cur.x+14,cur.y-18,180);
     tool.classList.remove('erasing');
-    const c=rel(rot.querySelector('.caret').getBoundingClientRect());
-    await move(c.l,c.b-c.h*.15,320);
-    followRot=true;cb();
-  };
-  themeBtn.addEventListener('click',()=>setTimeout(()=>{if(followRot)window.__toolFollow()},50));
-  run();
+  }
+
+  async function start(){
+    await sleep(700);
+    tool.classList.add('on');
+    const shown=doodles.filter(d=>d.offsetParent);
+    /* doodles already on screen are written right away… */
+    const now=shown.filter(onScreen),later=shown.filter(d=>!onScreen(d));
+    await withTool(async()=>{for(const d of now)await writeDoodle(d)});
+    /* …the rest are written only when the visitor scrolls to them */
+    later.forEach(d=>whenVisible(d).then(()=>withTool(async()=>{if(!d.classList.contains('done')){await writeDoodle(d);await rest()}})));
+    /* headline word: write → rest → erase → write next … */
+    await withTool(async()=>{await rest()});
+    let wi=0;
+    while(true){
+      await sleep(2300);
+      if(!heroVisible()||document.hidden){continue}
+      await withTool(async()=>{await eraseP();wi=(wi+1)%words.length;await typeP(words[wi])});
+    }
+  }
+  themeBtn.addEventListener('click',()=>setTimeout(()=>tool.style.setProperty('--tc',getComputedStyle(rot).color),50));
+  start();
 })();
 
 /* gallery lightbox */
