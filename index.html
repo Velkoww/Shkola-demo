@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Школа по езици „Даниела Гоцева“ – Обеля 1, София | Английски език за деца</title>
+<meta name="description" content="Школа по езици „Даниела Гоцева“ в ж.к. Обеля 1, София. Висококвалифицирано обучение по английски език – от предучилищна възраст до сертификатно ниво. Над 30 години опит, 5.0 ★ в Google.">
+<meta property="og:title" content="Школа по езици „Даниела Гоцева“ – Обеля 1">
+<meta property="og:description" content="Английски език за деца – от предучилищна възраст до сертификатно ниво. Над 30 години в Обеля 1.">
+<meta property="og:image" content="img/front-flowers.jpg">
+<meta name="theme-color" content="#1f3a8a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1b2440; --muted:#5b6582; --bg:#fffaf1; --card:#ffffff;
+  --red:#e63946; --yellow:#ffc233; --blue:#2463eb; --green:#22a45d; --navy:#1f3a8a;
+  --radius:22px; --shadow:0 10px 30px rgba(27,36,64,.10);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:17px}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:Comfortaa,Nunito,sans-serif;line-height:1.2;margin:0 0 .5em}
+h2{font-size:clamp(1.7rem,4vw,2.4rem)}
+.wrap{width:min(1140px,92%);margin-inline:auto}
+section{padding:80px 0}
+.eyebrow{display:inline-block;font-weight:800;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:.6rem}
+
+/* pencil stripe */
+.pencils{height:10px;background:linear-gradient(90deg,var(--red) 0 25%,var(--yellow) 25% 50%,var(--blue) 50% 75%,var(--green) 75%)}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,250,241,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(27,36,64,.06)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo svg{flex:none}
+.logo b{font-family:Comfortaa,sans-serif;font-size:1.02rem;line-height:1.1;display:block}
+.logo small{color:var(--muted);font-size:.78rem;font-weight:700}
+.menu{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+.menu a{text-decoration:none;font-weight:700;color:var(--muted)}
+.menu a:hover{color:var(--blue)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:800;text-decoration:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--red);color:#fff;box-shadow:0 8px 20px rgba(230,57,70,.3)}
+.btn-ghost{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+.burger{display:none;background:none;border:0;padding:8px;cursor:pointer}
+@media(max-width:900px){
+  .menu{display:none;position:absolute;top:72px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);box-shadow:var(--shadow)}
+  .menu.open{display:flex}
+  .menu a{display:block;padding:14px 4%;border-top:1px solid rgba(27,36,64,.06)}
+  .burger{display:block}
+  .nav .btn{display:none}
+}
+
+/* hero */
+.hero{padding:56px 0 70px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(2.1rem,5vw,3.4rem)}
+.hero h1 .hl{background:linear-gradient(transparent 62%,rgba(255,194,51,.65) 0);padding:0 .1em}
+.lead{font-size:1.15rem;color:var(--muted);max-width:34em}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0}
+.rating{display:inline-flex;align-items:center;gap:10px;background:#fff;padding:10px 16px;border-radius:14px;box-shadow:var(--shadow);font-weight:700;text-decoration:none}
+.stars{color:#f5a623;letter-spacing:2px}
+.hero-photo{position:relative}
+.hero-photo img{border-radius:28px;box-shadow:var(--shadow);aspect-ratio:4/3.4;object-fit:cover;width:100%}
+.badge{position:absolute;background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:12px 16px;font-weight:800;line-height:1.2}
+.badge.b1{left:-22px;bottom:28px}
+.badge.b1 span{display:block;font-family:Comfortaa;font-size:2rem;color:var(--red)}
+.badge.b2{right:-14px;top:22px;background:var(--yellow)}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.badge.b1{left:10px}.badge.b2{right:10px}}
+
+/* stats */
+.stats{background:var(--navy);color:#fff;padding:40px 0}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.stats strong{display:block;font-family:Comfortaa;font-size:2rem;color:var(--yellow)}
+.stats span{opacity:.85;font-weight:600}
+@media(max-width:700px){.stats .wrap{grid-template-columns:repeat(2,1fr)}}
+
+/* about */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.split img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow)}
+.quote{border-left:6px solid var(--yellow);background:#fff;padding:16px 20px;border-radius:0 16px 16px 0;margin-top:20px;font-style:italic;color:var(--muted)}
+.quote b{font-style:normal;color:var(--ink)}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+
+/* programs */
+.programs{background:#fff}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:34px}
+.card{background:var(--bg);border-radius:var(--radius);padding:26px 22px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:7px;background:var(--c)}
+.card .ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:1.6rem;background:color-mix(in srgb,var(--c) 18%,#fff);margin-bottom:14px}
+.card h3{font-size:1.15rem}
+.card p{margin:0;color:var(--muted);font-size:.97rem}
+.card .age{display:inline-block;margin-top:12px;font-weight:800;font-size:.85rem;color:var(--c)}
+@media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.cards{grid-template-columns:1fr}}
+
+/* why */
+.why-list{display:grid;gap:16px;margin-top:20px}
+.why-item{display:flex;gap:14px;align-items:flex-start}
+.why-item .dot{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:800}
+.why-item h3{font-size:1.05rem;margin:2px 0 2px;font-family:Nunito,system-ui,sans-serif;font-weight:800}
+.why-item p{margin:0;color:var(--muted)}
+.award{background:linear-gradient(135deg,var(--yellow),#ffd76b);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
+.award .big{font-family:Comfortaa;font-size:3.2rem;line-height:1}
+.award p{margin:.6em 0 0;font-weight:600}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;grid-auto-flow:dense;gap:14px;margin-top:30px}
+.gallery button{padding:0;border:0;border-radius:18px;overflow:hidden;cursor:zoom-in;background:#ddd}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.gallery button:hover img{transform:scale(1.06)}
+.gallery .tall{grid-row:span 2}
+.gallery .wide{grid-column:span 2}
+@media(max-width:800px){.gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}}
+.lightbox{position:fixed;inset:0;background:rgba(10,14,30,.9);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.lightbox.open{display:flex}
+.lightbox img{max-height:88vh;border-radius:12px}
+.lightbox button{position:absolute;top:16px;right:20px;background:#fff;border:0;border-radius:50%;width:44px;height:44px;font-size:1.4rem;cursor:pointer}
+
+/* reviews */
+.reviews{background:#fff}
+.rev-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.score{display:flex;align-items:center;gap:14px}
+.score .num{font-family:Comfortaa;font-size:3rem;font-weight:700}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:30px}
+.rev{background:var(--bg);border-radius:var(--radius);padding:24px}
+.rev p{margin:.5em 0 1em}
+.who{display:flex;align-items:center;gap:10px;font-weight:800}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800}
+@media(max-width:900px){.rev-grid{grid-template-columns:1fr}}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:30px}
+.info{background:var(--navy);color:#fff;border-radius:var(--radius);padding:34px}
+.info a{color:#fff}
+.info-row{display:flex;gap:14px;margin:18px 0}
+.info-row .i{flex:none;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:1.2rem}
+.info-row small{display:block;opacity:.7;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.72rem}
+.map{border:0;width:100%;height:240px;border-radius:16px;margin-top:10px}
+form{background:#fff;border-radius:var(--radius);padding:34px;box-shadow:var(--shadow)}
+label{display:block;font-weight:700;font-size:.92rem;margin:14px 0 6px}
+input,select,textarea{width:100%;padding:13px 15px;border-radius:12px;border:2px solid #e7e2d6;font:inherit;background:#fffdf8}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-note{display:none;margin-top:14px;padding:14px;border-radius:12px;background:#e9f8ef;color:#145c34;font-weight:700}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr}.row2{grid-template-columns:1fr}}
+
+footer{background:#121a33;color:#c9cfe2;padding:34px 0 90px;font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:#fff}
+
+/* mobile call bar */
+.callbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none;gap:10px}
+.callbar a{flex:1;justify-content:center}
+@media(max-width:700px){.callbar{display:flex}footer{padding-bottom:100px}}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="pencils"></div>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Начало">
+      <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+        <rect x="3" y="12" width="8" height="26" rx="1" fill="#e63946"/><path d="M3 12l4-8 4 8z" fill="#e63946"/>
+        <rect x="13" y="8" width="8" height="30" rx="1" fill="#ffc233"/><path d="M13 8l4-7 4 7z" fill="#ffc233"/>
+        <rect x="23" y="12" width="8" height="26" rx="1" fill="#2463eb"/><path d="M23 12l4-8 4 8z" fill="#2463eb"/>
+        <rect x="33" y="10" width="8" height="28" rx="1" fill="#22a45d"/><path d="M33 10l4-7 4 7z" fill="#22a45d"/>
+      </svg>
+      <span><b>Школа по езици<br>„Даниела Гоцева“</b><small>Обеля 1 · София</small></span>
+    </a>
+    <ul class="menu" id="menu">
+      <li><a href="#about">За нас</a></li>
+      <li><a href="#programs">Обучение</a></li>
+      <li><a href="#gallery">Галерия</a></li>
+      <li><a href="#reviews">Отзиви</a></li>
+      <li><a href="#contact">Контакти</a></li>
+    </ul>
+    <a class="btn btn-primary" href="tel:+359878798916">📞 087 879 8916</a>
+    <button class="burger" aria-label="Меню" aria-expanded="false" onclick="const m=document.getElementById('menu');m.classList.toggle('open');this.setAttribute('aria-expanded',m.classList.contains('open'))">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1b2440" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Английски език · Обеля 1</span>
+      <h1>Английски, който <span class="hl">остава</span> за цял живот</h1>
+      <p class="lead">Висококвалифицирано обучение по английски език – от предучилищна възраст до сертификатно ниво. Над 30 години учим децата от квартала с търпение, усмивка и реални резултати.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#contact">Запишете пробен час</a>
+        <a class="btn btn-ghost" href="tel:+359878798916">📞 Обадете се</a>
+      </div>
+      <a class="rating" href="https://maps.app.goo.gl/n635SXJGEFcRQ3Ke9" target="_blank" rel="noopener">
+        <span class="stars">★★★★★</span> 5.0 · 35 отзива в Google
+      </a>
+    </div>
+    <div class="hero-photo">
+      <img src="img/front-flowers.jpg" alt="Входът на школата с цветна ограда от моливи и ириси" width="1100" height="863">
+      <div class="badge b1"><span>30+</span>години в Обеля 1</div>
+      <div class="badge b2">🏆 Първо място в България</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div><strong>30+</strong><span>години опит</span></div>
+    <div><strong>5.0 ★</strong><span>оценка в Google</span></div>
+    <div><strong>4</strong><span>програми по възраст</span></div>
+    <div><strong>2</strong><span>поколения ученици</span></div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap split">
+    <img class="reveal" src="img/classroom.jpg" alt="Класната стая на школата" loading="lazy" width="1100" height="807">
+    <div class="reveal">
+      <span class="eyebrow">За нас</span>
+      <h2>Школата, в която учат вече и внуците</h2>
+      <p>Школа по езици „Даниела Гоцева“ работи в ж.к. Обеля 1 повече от три десетилетия. Започнахме като малка квартална школа и останахме такава – уютна, близка и с учители, които познават всяко дете по име.</p>
+      <p>Подготвяме децата за училище, за изпити и за международни сертификати, а най-вече – да говорят английски свободно и с удоволствие.</p>
+      <div class="quote">„Много съм доволна от школата! Преди 25 години дъщеря ми я посещаваше, а сега внукът ми!“<br><b>— Румяна, Google отзив</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="programs" id="programs">
+  <div class="wrap">
+    <span class="eyebrow">Обучение</span>
+    <h2>Програма за всяка възраст</h2>
+    <p class="lead">Групи по възраст и ниво – детето учи с връстници и напредва със собствено темпо.</p>
+    <div class="cards">
+      <div class="card reveal" style="--c:var(--red)"><div class="ico">🧸</div><h3>Предучилищна възраст</h3><p>Първи думи и песнички на английски чрез игри, картинки и движение.</p><span class="age">Детска градина</span></div>
+      <div class="card reveal" style="--c:#d99a00"><div class="ico">✏️</div><h3>Начален етап</h3><p>Четене, писане и говорене – здрава основа и подкрепа за училищния материал.</p><span class="age">1. – 4. клас</span></div>
+      <div class="card reveal" style="--c:var(--blue)"><div class="ico">📘</div><h3>Прогимназия и гимназия</h3><p>Граматика, лексика и подготовка за външно оценяване, НВО и матури.</p><span class="age">5. – 12. клас</span></div>
+      <div class="card reveal" style="--c:var(--green)"><div class="ico">🎓</div><h3>Сертификатно ниво</h3><p>Подготовка за международни изпити и състезания – с доказани резултати.</p><span class="age">Сертификати</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="eyebrow">Защо родителите ни избират</span>
+      <h2>Ефективно учене в приятна атмосфера</h2>
+      <div class="why-list">
+        <div class="why-item"><div class="dot" style="background:var(--red)">1</div><div><h3>Прекрасни учители</h3><p>Търпеливи и вдъхновяващи – децата идват с желание.</p></div></div>
+        <div class="why-item"><div class="dot" style="background:var(--yellow)">2</div><div><h3>Високо ниво</h3><p>Обучение, което изпреварва училищната програма.</p></div></div>
+        <div class="why-item"><div class="dot" style="background:var(--blue)">3</div><div><h3>Достъпна цена</h3><p>Качествено обучение без да натоварва семейния бюджет.</p></div></div>
+        <div class="why-item"><div class="dot" style="background:var(--green)">4</div><div><h3>До вкъщи</h3><p>В сърцето на Обеля 1 – удобно веднага след училище.</p></div></div>
+      </div>
+    </div>
+    <div class="award reveal">
+      <div class="big">🏆 1-во</div>
+      <h3 style="margin-top:.4em">място в България</h3>
+      <p>Наша ученичка спечели първо място в национално състезание по английски език на Pearson. Гордеем се с всички наши ученици!</p>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="background:#fff">
+  <div class="wrap">
+    <span class="eyebrow">Галерия</span>
+    <h2>Нашата школа</h2>
+    <div class="gallery">
+      <button class="wide"><img src="img/front.jpg" alt="Фасадата на школата" loading="lazy"></button>
+      <button class="tall"><img src="img/entrance.jpg" alt="Входът с бяла роза" loading="lazy"></button>
+      <button><img src="img/tulips.jpg" alt="Лалета в градинката" loading="lazy"></button>
+      <button><img src="img/garden.jpg" alt="Оградата от цветни моливи" loading="lazy"></button>
+      <button class="tall"><img src="img/whiteboard.jpg" alt="Урок на бялата дъска" loading="lazy"></button>
+      <button class="wide"><img src="img/anniversary.jpg" alt="Празник за 25 години школа" loading="lazy"></button>
+      <button><img src="img/irises.jpg" alt="Ириси пред школата" loading="lazy"></button>
+      <button><img src="img/lesson.jpg" alt="Ученички пишат на дъската" loading="lazy" style="object-position:center 30%"></button>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="lb" onclick="this.classList.remove('open')"><button aria-label="Затвори">×</button><img alt=""></div>
+
+<section class="reviews" id="reviews" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="rev-head">
+      <div><span class="eyebrow">Отзиви</span><h2>Какво казват родители и ученици</h2></div>
+      <div class="score"><span class="num">5.0</span><div><span class="stars">★★★★★</span><br><a href="https://maps.app.goo.gl/n635SXJGEFcRQ3Ke9" target="_blank" rel="noopener">35 отзива в Google</a></div></div>
+    </div>
+    <div class="rev-grid">
+      <div class="rev reveal" style="background:#fff"><span class="stars">★★★★★</span><p>„Страхотна школа! Учителите са невероятни! Силно препоръчвам тази школа!“</p><div class="who"><span class="av" style="background:var(--green)">С</span>Стилиян Д.</div></div>
+      <div class="rev reveal" style="background:#fff"><span class="stars">★★★★★</span><p>„Аз съм много доволен от образованието, което получаваме, и то е на много по-високо ниво от всички!“</p><div class="who"><span class="av" style="background:var(--blue)">К</span>Кристиян С.</div></div>
+      <div class="rev reveal" style="background:#fff"><span class="stars">★★★★★</span><p>„Страхотна школа! Стаите са приятни, а обучението – ефективно и полезно. Със сигурност я препоръчвам.“</p><div class="who"><span class="av" style="background:var(--red)">V</span>Viktor A.</div></div>
+      <div class="rev reveal" style="background:#fff"><span class="stars">★★★★★</span><p>„Чудесна школа! Научих много от нея! Страхотни учители!“</p><div class="who"><span class="av" style="background:#8b5cf6">D</span>Darina T.</div></div>
+      <div class="rev reveal" style="background:#fff"><span class="stars">★★★★★</span><p>„Страхотна школа! Атмосферата е уникална и учителите са полезни. Препоръчвам!“</p><div class="who"><span class="av" style="background:var(--yellow)">I</span>Ivan G.</div></div>
+      <div class="rev reveal" style="background:#fff"><span class="stars">★★★★★</span><p>„Ако искате вашето дете да научи английски език и това да е на достъпна цена, това е правилното място.“</p><div class="who"><span class="av" style="background:var(--navy)">Д</span>Диана В.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:#fff">
+  <div class="wrap">
+    <span class="eyebrow">Контакти</span>
+    <h2>Запишете детето си за пробен час</h2>
+    <div class="contact-grid" style="margin-top:26px">
+      <div class="info">
+        <div class="info-row"><div class="i">📍</div><div><small>Адрес</small>ж.к. Обеля 1, бл. 107, до вх. Б<br>1387 София</div></div>
+        <div class="info-row"><div class="i">📞</div><div><small>Телефон</small><a href="tel:+359878798916">087 879 8916</a></div></div>
+        <div class="info-row"><div class="i">✉️</div><div><small>Имейл</small><a href="mailto:gotseva@gbg.bg">gotseva@gbg.bg</a></div></div>
+        <div class="info-row"><div class="i">🕒</div><div><small>Работно време</small>До 18:00 · график по телефона</div></div>
+        <iframe class="map" loading="lazy" title="Карта" src="https://maps.google.com/maps?q=%D0%9E%D0%B1%D0%B5%D0%BB%D1%8F%201%2C%20%D0%B1%D0%BB.%20107%2C%20%D0%A1%D0%BE%D1%84%D0%B8%D1%8F&z=16&output=embed"></iframe>
+      </div>
+      <form id="form" novalidate>
+        <div class="row2">
+          <div><label for="n">Име на родителя</label><input id="n" name="name" required autocomplete="name"></div>
+          <div><label for="p">Телефон</label><input id="p" name="phone" type="tel" required autocomplete="tel"></div>
+        </div>
+        <div class="row2">
+          <div><label for="a">Възраст / клас на детето</label><input id="a" name="age" placeholder="напр. 2. клас"></div>
+          <div><label for="l">Ниво</label><select id="l" name="level"><option>Начинаещ</option><option>Средно ниво</option><option>Напреднал</option><option>Не знам</option></select></div>
+        </div>
+        <label for="m">Съобщение</label>
+        <textarea id="m" name="message" rows="4" placeholder="Удобни дни и часове, въпроси…"></textarea>
+        <button class="btn btn-primary" type="submit" style="margin-top:18px;width:100%;justify-content:center">Изпрати запитване</button>
+        <div class="form-note" id="note">Това е демо версия – формата ще бъде активирана след одобрение на сайта. Дотогава ни се обадете на <a href="tel:+359878798916">087 879 8916</a>.</div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="pencils"></div>
+<footer>
+  <div class="wrap">
+    <div>© <span id="y"></span> Школа по езици „Даниела Гоцева“ – Обеля 1</div>
+    <div>Сайт: <a href="https://velkoww.com" target="_blank" rel="noopener">velkoww.com</a></div>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a class="btn btn-primary" href="tel:+359878798916">📞 Обади се</a>
+  <a class="btn btn-ghost" href="#contact">Пробен час</a>
+</div>
+
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('menu').classList.remove('open')));
+const lb=document.getElementById('lb'),lbi=lb.querySelector('img');
+document.querySelectorAll('.gallery button').forEach(b=>b.addEventListener('click',()=>{const i=b.querySelector('img');lbi.src=i.src;lbi.alt=i.alt;lb.classList.add('open')}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('open')});
+document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();document.getElementById('note').style.display='block'});
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
