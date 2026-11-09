@@ -452,6 +452,15 @@ header.solid .logo-ic .bg{stroke:var(--board)}
 @keyframes dustfall{to{transform:translate(var(--dx),26px);opacity:0}}
 [data-theme="light"] .dust-p{display:none}
 
+.tool .eraser{display:none;position:absolute;left:-40px;top:-20px;width:80px;height:36px;transform:rotate(-7deg);border-radius:6px;background:linear-gradient(#9a7246,#6d4f2f 58%,#e8e3d6 58%,#cfc9b8);box-shadow:0 8px 12px rgba(0,0,0,.35)}
+.tool .eraser::after{content:"";position:absolute;left:8px;right:8px;top:6px;height:4px;border-radius:2px;background:rgba(255,255,255,.18)}
+[data-theme="light"] .tool .eraser{background:linear-gradient(#4f8cff,#1f5fd1 58%,#3a3f48 58%,#2a2f3a)}
+.tool.erasing .body{display:none}
+.tool.erasing .eraser{display:block}
+.smear{position:absolute;pointer-events:none;z-index:1;border-radius:40%;background:radial-gradient(ellipse at center,rgba(255,255,255,.16),rgba(255,255,255,.05) 55%,transparent 72%);filter:blur(5px);animation:smearfade 2.6s ease forwards}
+[data-theme="light"] .smear{background:radial-gradient(ellipse at center,rgba(110,120,140,.13),transparent 70%)}
+@keyframes smearfade{0%{opacity:0}15%{opacity:1}to{opacity:0}}
+
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
 .rv.in{opacity:1;transform:none}
 .note.rv.in:nth-child(odd){transform:rotate(-1.2deg)}
@@ -504,7 +513,7 @@ header.solid .logo-ic .bg{stroke:var(--board)}
 
 <section class="hero board-sec" id="hero">
   <span class="bolt tl"></span><span class="bolt tr"></span><span class="bolt bl"></span><span class="bolt br"></span>
-  <div class="tool" id="tool"><div class="body"><span class="chalk"></span><span class="marker"><span class="tip"></span><span class="nose"></span><span class="barrel"></span><span class="cap"></span></span></div></div>
+  <div class="tool" id="tool"><span class="eraser"></span><div class="body"><span class="chalk"></span><span class="marker"><span class="tip"></span><span class="nose"></span><span class="barrel"></span><span class="cap"></span></span></div></div>
   <canvas id="dust"></canvas>
   <svg class="plane" viewBox="0 0 48 32" aria-hidden="true"><path d="M2 16 46 2 30 30 22 19z" fill="#f3f1ea" opacity=".9"/><path d="M22 19 46 2 14 17z" fill="#d8d3c6"/></svg>
   <span class="doodle dd-date par" data-depth="8" id="bdDate" style="--ck:rgba(243,241,234,.7);--mk:#2a2f3a">Monday, 9th November</span>
@@ -742,8 +751,8 @@ menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classL
 const words=['английския','математиката','граматиката','задачите','новите думи','дробите'];
 const rot=document.getElementById('rot');let wi=0;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-function typeWord(w,cb){let i=0;rot.innerHTML='<span class="caret"></span>';const t=setInterval(()=>{i++;rot.innerHTML=w.slice(0,i)+'<span class="caret"></span>';window.__toolFollow&&window.__toolFollow();if(i>=w.length){clearInterval(t);setTimeout(cb,1900)}},70)}
-function eraseWord(cb){let w=rot.textContent;const t=setInterval(()=>{w=w.slice(0,-1);rot.innerHTML=w+'<span class="caret"></span>';window.__toolFollow&&window.__toolFollow();if(!w.length){clearInterval(t);cb()}},35)}
+function typeWord(w,cb){let i=0;rot.innerHTML='<span class="caret"></span>';const t=setInterval(()=>{i++;rot.innerHTML=w.slice(0,i)+'<span class="caret"></span>';window.__toolFollow&&window.__toolFollow();if(i>=w.length){clearInterval(t);window.__toolRest&&window.__toolRest();setTimeout(cb,2300)}},85)}
+function eraseWord(cb){if(window.__toolErase){window.__toolErase(cb);return}let w=rot.textContent;const t=setInterval(()=>{w=w.slice(0,-1);rot.innerHTML=w+'<span class="caret"></span>';if(!w.length){clearInterval(t);cb()}},35)}
 function cycle(){eraseWord(()=>{wi=(wi+1)%words.length;typeWord(words[wi],cycle)})}
 rot.innerHTML=words[0]+'<span class="caret"></span>';
 
@@ -883,7 +892,28 @@ function confetti(box){if(reduce)return;const cols=['#e2603a','#e5b445','#f3f1ea
   }
   let followRot=false;
   window.__toolFollow=()=>{if(!followRot)return;const c=rot.querySelector('.caret');if(!c)return;const r=c.getBoundingClientRect(),hr=hero.getBoundingClientRect();tool.style.setProperty('--tc',getComputedStyle(rot).color);place(r.left-hr.left-hero.clientLeft,r.bottom-hr.top-hero.clientTop-r.height*.15)};
-  themeBtn.addEventListener('click',()=>setTimeout(()=>{doodles.forEach(d=>{});if(followRot)window.__toolFollow()},50));
+  function rel(r){const hr=hero.getBoundingClientRect();return {l:r.left-hr.left-hero.clientLeft,t:r.top-hr.top-hero.clientTop,r:r.right-hr.left-hero.clientLeft,b:r.bottom-hr.top-hero.clientTop,w:r.width,h:r.height}}
+  /* after a word is written: move the marker away so it doesn't hide the last letter */
+  window.__toolRest=()=>{const c=rot.querySelector('.caret');if(!c)return;const r=rel(c.getBoundingClientRect());followRot=false;
+    const x=Math.min(r.r+58,hero.clientWidth-26),y=r.b+(hero.clientWidth<700?34:22);move(x,y,420).then(()=>followRot=true)};
+  /* eraser / sponge wipes the word before the next one */
+  window.__toolErase=async cb=>{
+    followRot=false;const R=rel(rot.getBoundingClientRect()),mid=R.t+R.h*.55;
+    tool.classList.add('erasing');
+    await move(R.l-6,mid,360);
+    const sm=document.createElement('i');sm.className='smear';sm.style.cssText=`left:${R.l-10}px;top:${R.t+R.h*.15}px;width:${R.w+30}px;height:${R.h*.8}px`;hero.appendChild(sm);setTimeout(()=>sm.remove(),2600);
+    await new Promise(res=>{const ms=Math.max(650,R.w*2.2),t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/ms);
+      place(R.l-6+(R.w+14)*k,mid+Math.sin(k*Math.PI*6)*R.h*.28);
+      rot.style.clipPath=`inset(-.3em -.3em -.3em ${Math.min(100,k*108)}%)`;
+      k<1?requestAnimationFrame(f):res()})(t0)});
+    rot.innerHTML='<span class="caret"></span>';rot.style.clipPath='';
+    await move(cur.x+14,cur.y-18,180);
+    tool.classList.remove('erasing');
+    const c=rel(rot.querySelector('.caret').getBoundingClientRect());
+    await move(c.l,c.b-c.h*.15,320);
+    followRot=true;cb();
+  };
+  themeBtn.addEventListener('click',()=>setTimeout(()=>{if(followRot)window.__toolFollow()},50));
   run();
 })();
 
