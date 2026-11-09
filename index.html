@@ -81,7 +81,7 @@ header.solid{background:var(--hdr);backdrop-filter:blur(8px);box-shadow:0 1px 0 
 .kicker::before{content:"";width:34px;height:2px;background:var(--mustard)}
 .hero h1{font-size:clamp(2.5rem,6vw,4.6rem);color:#fff;font-weight:600}
 .rot{display:inline-block;min-height:1.1em;font-family:Caveat,cursive;font-weight:700;color:var(--mustard);font-size:1.18em;line-height:1;min-width:4ch;filter:url(#chalk)}
-.rot .caret{display:inline-block;width:3px;height:.8em;background:var(--mustard);margin-left:4px;vertical-align:-.05em;animation:blink 1s steps(2) infinite}
+.rot .caret{display:inline-block;width:0;height:.8em;vertical-align:-.05em}
 @keyframes blink{50%{opacity:0}}
 .hero .lead{font-size:1.15rem;color:#c5d6ce;max-width:32em;margin:0 0 32px}
 .hero .actions{display:flex;flex-wrap:wrap;gap:12px}
@@ -245,17 +245,13 @@ blockquote cite{display:block;margin-top:8px;font-family:Manrope,sans-serif;font
 .g-score strong{font-family:Lora,serif;font-size:2.4rem;line-height:1}
 .stars{color:var(--mustard);letter-spacing:2px}
 .notes{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:50px}
-.note{background:var(--note);padding:32px 26px 24px;position:relative;box-shadow:0 14px 28px rgba(29,35,33,.08);transition:transform .35s}
 .note:nth-child(odd){transform:rotate(-1.2deg)}
 .note:nth-child(even){transform:rotate(1deg)}
 .note:hover{transform:rotate(0) translateY(-6px)}
 .note .tape{position:absolute;top:-12px;left:50%;width:90px;height:24px;margin-left:-45px;background:rgba(229,180,69,.7);transform:rotate(-3deg)}
 .note:nth-child(3n+2) .tape{background:rgba(226,96,58,.55);transform:rotate(4deg)}
 .note:nth-child(3n) .tape{background:rgba(30,59,52,.35)}
-.note p{font-family:Lora,serif;font-size:1.08rem;line-height:1.55;margin:.6em 0 1.2em}
-.note .by{font-weight:800;font-size:.92rem;display:flex;align-items:center;gap:10px}
 .note .av{width:34px;height:34px;border-radius:50%;background:var(--board);color:#fff;display:grid;place-items:center;font-size:.85rem}
-.note .by small{display:block;color:var(--muted);font-weight:600;font-size:.8rem}
 @media(max-width:900px){.notes{grid-template-columns:1fr}}
 
 /* contact */
@@ -325,9 +321,6 @@ header.solid .logo-ic .bg{stroke:var(--board)}
 .par{transition:transform .25s ease-out}
 
 /* highlighter */
-.hl{background:linear-gradient(transparent 60%,rgba(229,180,69,.55) 60% 92%,transparent 92%) no-repeat 0 0/0% 100%;transition:background-size 1.1s .3s cubic-bezier(.6,.1,.2,1);padding:0 .08em}
-.hl.in{background-size:100% 100%}
-.chalkboard .hl{background-image:linear-gradient(transparent 62%,rgba(226,96,58,.6) 62% 90%,transparent 90%)}
 
 /* tilt */
 .subject{transform-style:preserve-3d;will-change:transform}
@@ -358,7 +351,6 @@ header.solid .logo-ic .bg{stroke:var(--board)}
 [data-theme="light"] header:not(.solid) .logo-ic .bg{stroke:var(--board)}
 [data-theme="light"] .hero h1{color:#1b2240}
 [data-theme="light"] .rot{color:#d7263d;filter:none}
-[data-theme="light"] .rot .caret{background:#d7263d}
 [data-theme="light"] .kicker{color:#1f5fd1}[data-theme="light"] .kicker::before{background:#1f5fd1}
 [data-theme="light"] .hero .lead{color:#4a5160}
 [data-theme="light"] .board-sec .btn-chalk{border-color:#2a2f3a;color:#2a2f3a}
@@ -376,7 +368,6 @@ header.solid .logo-ic .bg{stroke:var(--board)}
 [data-theme="light"] .quiz-sec .intro{color:#4a5160}
 [data-theme="light"] .q-num{color:#5b6270}
 [data-theme="light"] .q-hint{color:#d7263d}
-[data-theme="light"] .quiz-sec .hl{background-image:linear-gradient(transparent 60%,rgba(255,214,0,.6) 60% 92%,transparent 92%)}
 [data-theme="light"] .quiz{background:linear-gradient(125deg,#fff,#f2f4f3 45%,#fcfdfc 60%,#eef1f0);border-color:#c4c9ce;box-shadow:0 30px 60px rgba(30,40,60,.18),inset 0 0 0 2px #e3e6e9}
 [data-theme="light"] .tab{border-color:rgba(42,47,58,.3);color:#2a2f3a}
 [data-theme="light"] .tab.on{background:#1f5fd1;border-color:#1f5fd1;color:#fff}
@@ -461,6 +452,39 @@ header.solid .logo-ic .bg{stroke:var(--board)}
 [data-theme="light"] .smear{background:radial-gradient(ellipse at center,rgba(110,120,140,.13),transparent 70%)}
 @keyframes smearfade{0%{opacity:0}15%{opacity:1}to{opacity:0}}
 
+/* ===== accent words written by hand (marker / chalk) ===== */
+.hl{position:relative;display:inline-block;font-family:Caveat,cursive;font-weight:700;font-size:1.22em;line-height:.9;color:var(--hlc,#d7263d);padding:0 .06em;white-space:nowrap;vertical-align:-.02em}
+.hl-t{display:inline-block;clip-path:inset(-.3em 100% -.3em -.2em)}
+.hl.in .hl-t{animation:hlw var(--d,1.2s) .25s cubic-bezier(.45,.05,.55,.95) forwards}
+@keyframes hlw{to{clip-path:inset(-.3em -.2em -.3em -.2em)}}
+.hl-tool{position:absolute;left:0;bottom:.12em;width:0;height:0;opacity:0;pointer-events:none}
+.hl.in .hl-tool{animation:hltool var(--d,1.2s) .25s cubic-bezier(.45,.05,.55,.95) forwards}
+@keyframes hltool{0%{left:0;opacity:1}8%{transform:translateY(-3px)}22%{transform:translateY(2px)}38%{transform:translateY(-2px)}55%{transform:translateY(3px)}72%{transform:translateY(-2px)}92%{opacity:1}100%{left:100%;opacity:0;transform:translate(26px,-20px)}}
+.hl-tool i{position:absolute;left:-2px;bottom:-2px;width:46px;height:12px;border-radius:2px 5px 5px 2px;transform-origin:0 100%;transform:rotate(-38deg);filter:drop-shadow(2px 4px 3px rgba(0,0,0,.3));
+  background:linear-gradient(90deg,var(--hlc) 0 12%,#e9ecef 12% 30%,var(--hlc) 30% 60%,color-mix(in srgb,var(--hlc) 70%,#000) 60%)}
+/* sections: marker colours on paper, chalk on boards */
+#subjects .hl{--hlc:#1f5fd1}#story .hl{--hlc:#d7263d}.principles .hl{--hlc:#1c9a52}#gallery .hl{--hlc:#e0631c}#reviews .hl{--hlc:#7b3fc4}
+.quiz-sec .hl{--hlc:#d7263d}
+[data-theme="dark"] .hl{filter:url(#chalk)}
+[data-theme="dark"] #subjects .hl{--hlc:#f2d27a}[data-theme="dark"] #story .hl{--hlc:#f7b9a6}[data-theme="dark"] .principles .hl{--hlc:#bfe3c8}[data-theme="dark"] #gallery .hl{--hlc:#f3f1ea}[data-theme="dark"] #reviews .hl{--hlc:#cdb8f2}[data-theme="dark"] .quiz-sec .hl{--hlc:#f2d27a}
+.chalkboard .hl{--hlc:#f2d27a;filter:url(#chalk)}
+[data-theme="dark"] .hl-tool i,.chalkboard .hl-tool i{width:38px;height:10px;border-radius:3px;background:linear-gradient(#fff,var(--hlc) 60%,#cfcab9)}
+
+/* ===== reviews: notebook pages taped to the wall ===== */
+.note{position:relative;padding:28px 22px 14px 54px;color:#1d3f91;transition:transform .35s;
+  background:
+    radial-gradient(circle at 18px 50%,var(--paper) 0 6px,transparent 6.5px) 0 14px/36px 84px repeat-y,
+    linear-gradient(90deg,transparent 40px,rgba(226,96,58,.55) 40px 41.5px,transparent 41.5px),
+    repeating-linear-gradient(transparent 0 27px,rgba(80,130,200,.32) 27px 28px) 0 0/100% 28px,
+    #fdfcf6;
+  box-shadow:0 14px 28px var(--shadow),0 1px 0 rgba(0,0,0,.04)}
+.note p{font-family:Caveat,cursive;font-weight:500;font-size:1.55rem;line-height:28px;margin:0 0 28px;color:#1d3f91}
+.note .by{display:flex;align-items:center;gap:10px;height:28px;font-family:Caveat,cursive;font-size:1.45rem;font-weight:700;color:#1d3f91;line-height:1}
+.note .by small{font-family:Manrope,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a93a3;margin-left:6px}
+.note .av{display:none}
+.pstars{display:flex;gap:2px;height:28px;align-items:flex-end;margin-bottom:6px}
+.pstars svg{width:28px;height:28px;overflow:visible}
+
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
 .rv.in{opacity:1;transform:none}
 .note.rv.in:nth-child(odd){transform:rotate(-1.2deg)}
@@ -472,6 +496,7 @@ header.solid .logo-ic .bg{stroke:var(--board)}
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="1" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.1"/></filter>
   <filter id="chalk"><feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter>
 </svg>
 
@@ -618,7 +643,7 @@ header.solid .logo-ic .bg{stroke:var(--board)}
     </div>
     <div>
       <div class="num"><b>03</b> Историята ни</div>
-      <h2 class="rv">Тук учиха родителите. <span class="hl">Днес учат децата им.</span></h2>
+      <h2 class="rv">Тук учиха родителите. Днес учат <span class="hl">децата им.</span></h2>
       <ul class="timeline">
         <li class="rv"><span class="dot">✎</span><div class="when">Преди 30+ години</div><h3>Първите ученици</h3><p>Даниела Гоцева отваря школата в Обеля 1 – малка, уютна и с много любов към езиците.</p></li>
         <li class="rv"><span class="dot">✿</span><div class="when">25 години</div><h3>Празник с учениците</h3><p>Отбелязваме юбилея заедно с поколения възпитаници. Пред входа вече цъфти градинката с моливите.</p></li>
@@ -676,12 +701,12 @@ header.solid .logo-ic .bg{stroke:var(--board)}
       <a class="g-score" href="https://maps.app.goo.gl/n635SXJGEFcRQ3Ke9" target="_blank" rel="noopener"><strong>5,0</strong><div><span class="stars">★★★★★</span><br><b>35 отзива</b> в Google →</div></a>
     </div>
     <div class="notes">
-      <div class="note rv"><span class="tape"></span><span class="stars">★★★★★</span><p>Страхотна школа! Учителите са невероятни! Силно препоръчвам тази школа!</p><div class="by"><span class="av">С</span><div>Стилиян Д.<small>Google</small></div></div></div>
-      <div class="note rv"><span class="tape"></span><span class="stars">★★★★★</span><p>Много съм доволен от образованието, което получаваме – на много по-високо ниво от всички!</p><div class="by"><span class="av" style="background:var(--coral)">К</span><div>Кристиян С.<small>Google</small></div></div></div>
-      <div class="note rv"><span class="tape"></span><span class="stars">★★★★★</span><p>Ако искате вашето дете да научи английски език и това да е на достъпна цена, това е правилното място.</p><div class="by"><span class="av" style="background:#b9852a">Д</span><div>Диана В.<small>Google</small></div></div></div>
-      <div class="note rv"><span class="tape"></span><span class="stars">★★★★★</span><p>Стаите са приятни, а обучението – ефективно и полезно. Със сигурност я препоръчвам.</p><div class="by"><span class="av">V</span><div>Viktor A.<small>Google</small></div></div></div>
-      <div class="note rv"><span class="tape"></span><span class="stars">★★★★★</span><p>Атмосферата е уникална и учителите са полезни. Препоръчвам!</p><div class="by"><span class="av" style="background:var(--coral)">I</span><div>Ivan G.<small>Google</small></div></div></div>
-      <div class="note rv"><span class="tape"></span><span class="stars">★★★★★</span><p>Чудесна школа! Научих много от нея! Страхотни учители!</p><div class="by"><span class="av" style="background:#b9852a">D</span><div>Darina T.<small>Google</small></div></div></div>
+      <div class="note rv"><span class="tape"></span><span class="pstars"></span><p>Страхотна школа! Учителите са невероятни! Силно препоръчвам тази школа!</p><div class="by">– Стилиян Д. <small>Google</small></div></div>
+      <div class="note rv"><span class="tape"></span><span class="pstars"></span><p>Много съм доволен от образованието, което получаваме – на много по-високо ниво от всички!</p><div class="by">– Кристиян С. <small>Google</small></div></div>
+      <div class="note rv"><span class="tape"></span><span class="pstars"></span><p>Ако искате вашето дете да научи английски език и това да е на достъпна цена, това е правилното място.</p><div class="by">– Диана В. <small>Google</small></div></div>
+      <div class="note rv"><span class="tape"></span><span class="pstars"></span><p>Стаите са приятни, а обучението – ефективно и полезно. Със сигурност я препоръчвам.</p><div class="by">– Viktor A. <small>Google</small></div></div>
+      <div class="note rv"><span class="tape"></span><span class="pstars"></span><p>Атмосферата е уникална и учителите са полезни. Препоръчвам!</p><div class="by">– Ivan G. <small>Google</small></div></div>
+      <div class="note rv"><span class="tape"></span><span class="pstars"></span><p>Чудесна школа! Научих много от нея! Страхотни учители!</p><div class="by">– Darina T. <small>Google</small></div></div>
     </div>
   </div>
 </section>
@@ -823,7 +848,35 @@ const prog=document.getElementById('prog');
 addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;prog.style.width=(h>0?scrollY/h*100:0)+'%'},{passive:true});
 
 /* highlighter */
-document.querySelectorAll('.hl').forEach(el=>io.observe(el));
+
+/* accent words: wrap for handwriting animation */
+document.querySelectorAll('.hl').forEach(el=>{const t=el.textContent;el.style.setProperty('--d',Math.max(.7,t.length*.075)+'s');el.innerHTML=`<span class="hl-t">${t}</span><span class="hl-tool"><i></i></span>`;io.observe(el)});
+
+/* pencil-drawn stars */
+(function(){
+  let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  const j=a=>(rnd()-.5)*a;
+  function star(cx,cy,R,r,jit){const pts=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=(i%2?r:R)*(1+j(jit));pts.push([cx+Math.cos(a)*rr+j(jit*6),cy+Math.sin(a)*rr+j(jit*6)])}return pts}
+  const path=p=>'M'+p.map(q=>q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' L')+' Z';
+  const cols=['#f4b400','#f2a900','#ffbf1f','#f6b10a'];
+  let n=0;
+  document.querySelectorAll('.pstars').forEach(box=>{
+    let html='';
+    for(let k=0;k<5;k++){
+      n++;const id='st'+n,col=cols[Math.floor(rnd()*cols.length)];
+      const fillShape=star(14+j(4.5),15+j(4),13.6,6.8,.16);          /* colouring slightly bigger & shifted → goes over the lines */
+      let hatch='';for(let y=1;y<29;y+=2.2){hatch+=`M${(-1+j(3)).toFixed(1)} ${(y+j(1.4)).toFixed(1)} L${(29+j(3)).toFixed(1)} ${(y-5+j(1.4)).toFixed(1)} `}
+      const o1=star(14,15,12,5.2,.1),o2=star(14+j(1),15+j(1),12,5.2,.12);
+      html+=`<svg viewBox="0 0 28 28" aria-hidden="true"><defs><clipPath id="${id}"><path d="${path(fillShape)}"/></clipPath></defs>
+        <path d="${path(fillShape)}" fill="${col}" opacity=".45"/>
+        <path d="${hatch}" stroke="${col}" stroke-width="1.7" stroke-linecap="round" opacity=".85" clip-path="url(#${id})" fill="none"/>
+        <path d="${path(o1)}" fill="none" stroke="#4a4f57" stroke-width="1.15" stroke-linejoin="round" opacity=".85" filter="url(#pencil)"/>
+        <path d="${path(o2)}" fill="none" stroke="#4a4f57" stroke-width=".7" stroke-linejoin="round" opacity=".55" filter="url(#pencil)"/></svg>`;
+    }
+    box.innerHTML=html;box.setAttribute('role','img');box.setAttribute('aria-label','5 от 5 звезди');
+  });
+})();
+
 
 /* mouse parallax in hero */
 const hero=document.getElementById('hero'),pars=hero.querySelectorAll('.par');
